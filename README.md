@@ -14,11 +14,13 @@ Use screen command to open 3 sessions, left one for vim editing, right top one f
    Screen version 4.02.01 (GNU) 28-Apr-14
 
 --Prerequirments:
-** screen
-** make something like this run secessful:
+  >1,screen
+  
+  >2,make something like this run secessful:
+  
   >java -server -cp .:/home/op/bin/clojure/jline-1.0.jar:/home/op/bin/clojure/clojure-1.5.1.jar jline.ConsoleRunner clojure.main
   
-  #above command just start a clojure REPL, you can change that to anything fit your need
+  >#above command just start a clojure REPL, you can change that to anything fit your need
   
 --Runtime resource file
   >$HOME/.tmp/screenrc             #screen resource for this screen
