@@ -2,12 +2,14 @@
 # zuo,Sep 13, 2018
 # sclj.bash
 
+JARDIR=$HOME/Downloads;
+LISTEN_PIPE=$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input;
+
 if [ $# -ne 1 ]; then
 	#	echo "missing source code, parameters number = $#";
 	echo -e "Usage:\n\t$0 your_clojure_source_file";
 	exit;
 fi;
-LISTEN_PIPE=$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input;
 
 mkdir -p $HOME/.tmp/;
 
@@ -68,7 +70,7 @@ split -v
 screen -t vim 1
 focus next
 screen -t result 2
-exec /bin/bash -c "ln -sf \`readlink -f /proc/\$\$/fd/0\` /home/op/.tmp/serverinput-pts;exec 77<>/home/op/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input;eval 'cat /home/op/.tmp/serverinput-pts>/home/op/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input&';echo -n \"\n\n\tLunching Clojure server ...\n\n\n\";java -server -cp .:/home/op/bin/clojure/jline-1.0.jar:/home/op/bin/clojure/clojure-1.5.1.jar jline.ConsoleRunner clojure.main</home/op/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input "
+exec /bin/bash -c "ln -sf \`readlink -f /proc/\$\$/fd/0\` $HOME/.tmp/serverinput-pts;exec 77<>$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input;eval 'cat $HOME/.tmp/serverinput-pts>$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input&';echo -n \"\n\n\tLunching Clojure server ...\n\n\n\";java -server -cp .:$JARDIR/jline-1.0.jar:$JARDIR/clojure-1.5.1.jar jline.ConsoleRunner clojure.main<$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input "
 split
 focus bottom
 screen -t bash 3
@@ -100,12 +102,12 @@ read -t30 -n1 -r -p 'Press any key to progress...' key
 # I do not care what the key is.===#fi
 
 TARGETFILE=$1;
-#eval "exec 77>/home/op/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input";
+#eval "exec 77>$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input";
 echo "-----------------here normal";
 #exec 3>never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input
 echo "-----------------we can reach here";
 screen -c $HOME/.tmp/screenrc -S myClojureIDE /bin/bash -c "exec 77>$LISTEN_PIPE; vim $1 -c \"map <F5> <Esc>:w<CR>:w! $LISTEN_PIPE <CR>\"";
 
 
-#java -server -cp .:/home/op/bin/clojure/jline-1.0.jar:/home/op/bin/clojure/clojure-1.5.1.jar jline.ConsoleRunner clojure.main
-#java -cp .:/home/op/bin/clojure/jline-1.0.jar:/home/op/bin/clojure/clojure-1.5.1.jar jline.ConsoleRunner clojure.main $@; #$* is same here
+#java -server -cp .:$JARDIR/jline-1.0.jar:$JARDIR/clojure-1.5.1.jar jline.ConsoleRunner clojure.main
+#java -cp .:$JARDIR/jline-1.0.jar:$JARDIR/clojure-1.5.1.jar jline.ConsoleRunner clojure.main $@; #$* is same here
