@@ -4,6 +4,9 @@ A simple semi-IDE using vim and SCREEN
 This is a very simple semi-IDE for edit Clojure source.
 Use screen command to open 3 sessions, left one for vim editing, right top one for clojure server run (AND, it can also accept keyboard input),right bottom one for system operation jobs.
 
+--Usage:
+  >Press <F5> to save current file and send the code to REPL
+
 --Test platform:
   >Lubuntu(ubuntu compatible) 14.04
   
