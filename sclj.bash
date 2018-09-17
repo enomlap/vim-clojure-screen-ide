@@ -108,7 +108,7 @@ TARGETFILE=$1;
 echo "-----------------here normal";
 #exec 3>never_use_this_temporal_pipe_file.this_file_is_used_for_clojure_input
 echo "-----------------we can reach here";
-screen -c $HOME/.tmp/screenrc -S myClojureIDE /bin/bash -c "exec 77>$LISTEN_PIPE; vim $1 -c \"map <F5> <Esc>:w<CR>:w! $LISTEN_PIPE <CR>\"";
+screen -c $HOME/.tmp/screenrc -S myClojureIDE /bin/bash -c "exec 77>$LISTEN_PIPE; vim $1 -c \"map <F5> <Esc>:w<CR>:w! $LISTEN_PIPE <CR><CR>\"";
 
 
 #java -server -cp .:$JARDIR/jline-1.0.jar:$JARDIR/clojure-1.5.1.jar jline.ConsoleRunner clojure.main
