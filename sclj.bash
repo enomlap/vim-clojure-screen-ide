@@ -8,6 +8,7 @@ LISTEN_PIPE=$HOME/.tmp/never_use_this_temporal_pipe_file.this_file_is_used_for_c
 if [ $# -ne 1 ]; then
 	#	echo "missing source code, parameters number = $#";
 	echo -e "Usage:\n\t$0 your_clojure_source_file";
+	echo -e "Or, for installation,use:\n\n\t$0 -i\n\n";
 	exit;
 fi;
 
@@ -24,13 +25,6 @@ lsof -t $LISTEN_PIPE >/dev/null 2>&1; r=$?;
 if [ 0 -eq $r ]; then
 	echo 'LISTEN_PIPE already in use, that means a clojure server may be already running, script exit.';
 	echo "or kill the server manually.";
-	exit;
-fi;
-
-#** check if my screen-clojure IDE .screenrc exists:
-if [ ! -f $HOME/.tmp/.screenrc ]; then
-	echo "$HOME/.tmp/.screenrc NOT exists, need installation, exit.";
-	echo -e "INSTALL:\n\n\t$0 -i\n\n";
 	exit;
 fi;
 
@@ -87,7 +81,15 @@ EOF
 	echo "screenrc installed.";
 	exit;
 fi
- 
+
+#** check if my screen-clojure IDE .screenrc exists:
+if [ ! -f $HOME/.tmp/screenrc ]; then
+	echo "$HOME/.tmp/screenrc NOT exists, need installation, exit.";
+	echo -e "INSTALL:\n\n\t$0 -i\n\n";
+	exit;
+fi;
+
+#** normal startup:
 echo -e "NOTE: the ESCAPE-KEY for this screen terminal is:\n\n\t\t\t`sed -n -e '/^escape/{s/^escape[[:space:]]*\([^[:space:]]*[[:space:]]*\)#*.*$/\1/;p;}' $HOME/.tmp/.screenrc`\n\n\nDo not forget otherwise you'll drown.\n\n";
 read -t30 -n1 -r -p 'Press any key to progress...' key
 #read -t30 -n1 -r -p 'Press any key in the next 30 seconds...' key
