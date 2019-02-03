@@ -35,7 +35,7 @@ cat>$HOME/.tmp/screenrc<<EOF
 startup_message off #disable start up welcom message
 termcapinfo xterm*|Eterm|mlterm|rxvt 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'
 term xterm
-escape ^__ # change command character from C-A to C-Z
+escape ^__ # change command character from C-A to C-Z, ^__: Ctrl+_ _
 setenv LC_CTYPE en_US.UTF-8
 defutf8 on
 setenv DISPLAY ':0'
